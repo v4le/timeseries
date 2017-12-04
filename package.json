@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tap test.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/melkio/timeseries#readme",
   "dependencies": {
-    "mocha": "^4.0.1",
-    "mongodb": "^2.2.33"
+    "ajv": "^5.5.1",
+    "mongodb": "^2.2.33",
+    "tap": "^11.0.0"
   }
 }
