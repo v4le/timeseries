@@ -1,8 +1,7 @@
+'use strict'
+
 const Ajv = require("ajv")
 const ajv = new Ajv();
-
-const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost/node'
 
 const schema = {
     "id": "http://json-schema.org/datapoint",
@@ -22,19 +21,29 @@ const schema = {
     "required" : ["assetId", "time"]
 }
 
-module.exports.addDataPoint = function (point, cb) {
-    const isValid = ajv.validate(schema, point)
-    
-    if (!isValid) {
-        throw new Error(ajv.errorsText())
+module.exports = function (db) {
+
+    const collection = db.collection('timeseries')
+
+    return{
+        addDataPoint
     }
 
-    MongoClient.connect(url, (err, db) => {
-        db.collection('timeseries')
-            .insert(point)
-            .then(result => {
-                cb(result.insertedIds[0])
-            })
-    })
+    async function addDataPoint(point){
+
+        const isValid = ajv.validate(schema, point)
+        
+        if (!isValid) {
+            
+            throw new Error(ajv.errorsText())
+        }
+    
+        
+        const result = await collection.insert(point)
+        return result.insertedIds[0]
+                
+    }
+
+    
 }
 
