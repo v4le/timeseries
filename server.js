@@ -2,6 +2,7 @@
 
 var Fastify = require('fastify')
 var service = require('./service')
+var dbConnector = require('./dbConnector')
 
 var opts = {
     port: 3000,
@@ -11,7 +12,11 @@ var opts = {
 
 
     const app = Fastify(opts)
+    app.register(dbConnector, {
+        url: 'mongodb://localhost/node'
+      })
     app.register(service, opts)
+    
     app.listen(opts.port, (err) => {
       if (err) {
         throw err

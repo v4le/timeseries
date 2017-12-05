@@ -19,6 +19,7 @@
   "dependencies": {
     "ajv": "^5.5.1",
     "fastify": "^0.35.3",
+    "fastify-plugin": "^0.1.1",
     "mongodb": "^2.2.33",
     "tap": "^11.0.0"
   }
