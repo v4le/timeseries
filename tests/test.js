@@ -2,7 +2,7 @@
 
 const tap = require('tap')
 const { beforeEach, test, afterEach } = tap
-const Timeseries = require('./index.js')
+const Timeseries = require('../index.js')
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost/node'
 
